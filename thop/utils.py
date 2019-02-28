@@ -72,7 +72,7 @@ def profile(model, input_size, custom_ops={}, quiet=False):
 		print("module", count, "ops:", m.total_ops, "module", count,"params:", m.total_params)
 		total_ops += m.total_ops
 		total_params += m.total_params
-
+                count += 1
 	total_ops = total_ops.item()
 	total_params = total_params.item()
 
