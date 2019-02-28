@@ -62,14 +62,15 @@ def profile(model, input_size, custom_ops={}, quiet=False):
 
 	x = torch.zeros(input_size)
 	model(x)
-        count = 1
+	
+	count = 1
 	total_ops = 0
 	total_params = 0
 	for m in model.modules():
 		if len(list(m.children())) > 0: # skip for non-leaf module
 			continue
-                print("module", count, "ops:", m.total_ops, "module", count,"params:", m.total_params)
-                total_ops += m.total_ops
+		print("module", count, "ops:", m.total_ops, "module", count,"params:", m.total_params)
+		total_ops += m.total_ops
 		total_params += m.total_params
 
 	total_ops = total_ops.item()
