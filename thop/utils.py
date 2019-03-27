@@ -76,7 +76,7 @@ def profile(model, input_size, custom_ops={}, return_list = False, quiet=False):
 		total_params += m.total_params
 		count += 1
 		opslist.append(m.total_ops)
-		paramlist.append(m.total_params)
+		paramslist.append(m.total_params)
 		
 	total_ops = total_ops.item()
 	total_params = total_params.item()
