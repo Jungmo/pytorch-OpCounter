@@ -21,7 +21,7 @@ register_hooks = {
 }
 
 
-def profile(model, input_size, custom_ops={}, quiet=False):
+def profile(model, input_size, custom_ops={}, return_list = False, quiet=False):
 	hook_handles = []
 
 	def add_hooks(m):
@@ -63,6 +63,8 @@ def profile(model, input_size, custom_ops={}, quiet=False):
 	x = torch.zeros(input_size)
 	model(x)
 	
+	opslist = []
+	paramslist = []
 	count = 1
 	total_ops = 0
 	total_params = 0
@@ -73,6 +75,9 @@ def profile(model, input_size, custom_ops={}, quiet=False):
 		total_ops += m.total_ops
 		total_params += m.total_params
 		count += 1
+		opslist.append(m.total_ops)
+		paramlist.append(m.total_params)
+		
 	total_ops = total_ops.item()
 	total_params = total_params.item()
 
@@ -80,5 +85,7 @@ def profile(model, input_size, custom_ops={}, quiet=False):
 	model.apply(remove_keys)
 	for handle in hook_handles:
 		handle.remove()
-
-	return total_ops, total_params
+	if return_list == True:
+		return opslist, paramlist
+	elif return_list == False:
+		return total_ops, total_params
