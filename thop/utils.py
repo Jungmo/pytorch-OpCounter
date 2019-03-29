@@ -86,6 +86,6 @@ def profile(model, input_size, custom_ops={}, return_list = False, quiet=False):
 	for handle in hook_handles:
 		handle.remove()
 	if return_list == True:
-		return opslist, paramlist
+		return opslist, paramslist
 	elif return_list == False:
 		return total_ops, total_params
