@@ -71,7 +71,6 @@ def profile(model, input_size, custom_ops={}, return_list = False, quiet=False):
 	for m in model.modules():
 		if len(list(m.children())) > 0: # skip for non-leaf module
 			continue
-		print("module", count, "ops:", m.total_ops, "\t\tmodule", count,"params:", m.total_params)
 		total_ops += m.total_ops
 		total_params += m.total_params
 		count += 1
